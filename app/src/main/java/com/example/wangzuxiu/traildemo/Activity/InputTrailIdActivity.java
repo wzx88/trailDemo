@@ -1,7 +1,6 @@
 package com.example.wangzuxiu.traildemo.Activity;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.wangzuxiu.traildemo.R;
@@ -15,6 +14,6 @@ public class InputTrailIdActivity extends AppCompatActivity {
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.inputtrailid);
+        setContentView(R.layout.activity_input_trail_id);
     }
 }

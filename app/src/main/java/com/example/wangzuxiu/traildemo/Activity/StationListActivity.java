@@ -11,55 +11,52 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.wangzuxiu.traildemo.Adapter.TrailListAdapter;
+import com.example.wangzuxiu.traildemo.Adapter.StationListAdapter;
 import com.example.wangzuxiu.traildemo.R;
 
-/**
- * Created by wangzuxiu on 04/03/18.
- */
+public class StationListActivity extends AppCompatActivity {
+    private RecyclerView rvStationList;
+    private RecyclerView.Adapter stationListAdapter;
+    private RecyclerView.LayoutManager stationListManager;
+    private FloatingActionButton fabAddStation;
+    private TextView tvEmptyStationList;
+    private String[] stationList = {"ISS Level 1", "ISS Level 2",
+            "ISS Level 3", "ISS Level 4", "ISS Level 5", "ISS Level 6", "ISS Level 7",
+            "ISS Level 8", "ISS Level 9", "ISS Level 10"};
 
-public class TrailListActivity extends AppCompatActivity{
-
-    private RecyclerView rvTrailList;
-    private RecyclerView.Adapter trailListAdapter;
-    private RecyclerView.LayoutManager trailListManager;
-    private FloatingActionButton fabAddTrail;
-    private TextView tvEmptyTrailList;
-    private String[][] trailList = {{"Tour to ISS", "20180301-ISS", "2018-03-01"}, {"Tour to NUS", "20180401-NUS", "2018-04-01"}};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-        this.setTitle(R.string.title_trail_list);
-        setContentView(R.layout.activity_trail_list);
+        this.setTitle(R.string.title_station_list);
+        setContentView(R.layout.activity_station_list);
 
-        rvTrailList = (RecyclerView) findViewById(R.id.trail_list);
-        rvTrailList.setHasFixedSize(true);
+        rvStationList = (RecyclerView) findViewById(R.id.station_list);
+        rvStationList.setHasFixedSize(false);
 
-        trailListManager = new LinearLayoutManager(this);
-        rvTrailList.setLayoutManager(trailListManager);
+        stationListManager = new LinearLayoutManager(this);
+        rvStationList.setLayoutManager(stationListManager);
 
-        trailListAdapter = new TrailListAdapter(trailList,false);
-        rvTrailList.setAdapter(trailListAdapter);
-        tvEmptyTrailList = findViewById(R.id.tv_empty_trail_list);
-        // For Participant Mode, text of tvEmptyTrailList should be changed
-        // tvEmptyTrailList.setText(R.string.empty_trail_list_participant); if user is participant
-        tvEmptyTrailList.setVisibility(trailListAdapter.getItemCount() != 0 ? View.GONE : View.VISIBLE);
+        stationListAdapter = new StationListAdapter(stationList,false);
+        rvStationList.setAdapter(stationListAdapter);
+
+        tvEmptyStationList = findViewById(R.id.tv_empty_station_list);
+        tvEmptyStationList.setVisibility(stationListAdapter.getItemCount() != 0 ? View.GONE : View.VISIBLE);
 
         // For Participant Mode, fabAddTrail and Menu-Edit(Not implemented yet) should be invisible
-        fabAddTrail = findViewById(R.id.fab_add_trail);
+        fabAddStation = findViewById(R.id.fab_add_station);
         // fabAddTrail.setVisibility(View.GONE); if user is participant
-        fabAddTrail.setOnClickListener(new View.OnClickListener() {
+        fabAddStation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(TrailListActivity.this, AddNewTrailActivity.class));
+                startActivity(new Intent(StationListActivity.this, AddNewStationActivity.class));
             }
         });
 
         // When trainer click the menu - Edit, the trailListAdapter should be changed to EditableTrailListAdapter
         // Not implemented yet
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // if user is participant then
@@ -80,8 +77,8 @@ public class TrailListActivity extends AppCompatActivity{
         } else if (i == R.id.action_edit){
 //            trailListAdapter.setEditable();
 //            trailListAdapter.notifyDataSetChanged();
-            trailListAdapter = new TrailListAdapter(trailList, true);
-            rvTrailList.setAdapter(trailListAdapter);
+            stationListAdapter = new StationListAdapter(stationList, true);
+            rvStationList.setAdapter(stationListAdapter);
 
             // How to exit Edit Mode? (not implemented yet)
         }

@@ -46,7 +46,7 @@ public class SelectModeActivity extends AppCompatActivity implements View.OnClic
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.selectmode);
+        setContentView(R.layout.activity_selectmode);
 
         button=findViewById(R.id.ok);
         button.setOnClickListener(this);
